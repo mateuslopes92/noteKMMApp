@@ -12,7 +12,7 @@ SELECT * FROM noteEntity;
 getNoteById:
 SELECT * FROM noteEntity WHERE id = ?;
 
-insertnote:
+insertNote:
 INSERT OR REPLACE INTO noteEntity(
     id,
     title,
