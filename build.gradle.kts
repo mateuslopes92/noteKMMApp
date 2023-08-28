@@ -11,7 +11,7 @@ buildscript {
         classpath("com.squareup.sqldelight:gradle-plugin:1.5.5")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
         classpath("com.android.tools.build:gradle:7.2.2")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.42")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:2.47")
     }
 }
 
