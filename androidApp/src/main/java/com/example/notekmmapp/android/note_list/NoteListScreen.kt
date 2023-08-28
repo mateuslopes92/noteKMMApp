@@ -29,11 +29,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.notekmmapp.domain.note.Note
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun NoteListScreen(
+    navController: NavController,
     viewModel: NoteListViewModel = hiltViewModel()
 ){
     val state by viewModel.state.collectAsState()
@@ -44,7 +46,7 @@ fun NoteListScreen(
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = { /*TODO*/ }, backgroundColor = Color.Black) {
+            FloatingActionButton(onClick = { navController.navigate("note_detail/-1L") }, backgroundColor = Color.Black) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Note", tint = Color.White)
             }
         }
@@ -66,7 +68,7 @@ fun NoteListScreen(
                         .fillMaxWidth()
                         .height(90.dp)
                 )
-                this@Column.AnimatedVisibility(visible = state.isSearchActive, enter = fadeIn(), exit = fadeOut()) {
+                this@Column.AnimatedVisibility(visible = !state.isSearchActive, enter = fadeIn(), exit = fadeOut()) {
                     Text(text = "All notes", fontWeight = FontWeight.Bold, fontSize = 30.sp)
                 }
             }
@@ -75,7 +77,9 @@ fun NoteListScreen(
                     NoteItem(
                         note = note,
                         backgroundColor = Color(note.colorHex),
-                        onNoteClick = { /*TODO*/ },
+                        onNoteClick = {
+                            navController.navigate("note_detail/${note.id}")
+                        },
                         onDeleteClick = { viewModel.deleteNoteById(note.id!!)},
                         modifier = Modifier.fillMaxWidth().padding(16.dp).animateItemPlacement()
                     )
